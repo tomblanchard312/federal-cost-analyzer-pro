@@ -1,0 +1,23 @@
+{
+  "eventName": "Test Event",
+  "eventType": "CONFERENCE",
+  "locality": "WASHINGTON",
+  "duration": 8,
+  "personnel": [
+    {
+      "grade": "13",
+      "step": 1,
+      "count": 1
+    }
+  ],
+  "equipment": [
+    {
+      "code": "GEN_006",
+      "count": 1
+    }
+  ],
+  "supplies": [],
+  "contractors": [],
+  "overtime": [],
+  "customCosts": []
+}

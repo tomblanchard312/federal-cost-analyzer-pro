@@ -1,0 +1,30 @@
+{
+  "eventName": "Test Event",
+  "eventType": "CONFERENCE",
+  "locality": "WASHINGTON",
+  "duration": 8,
+  "personnel": [
+    {
+      "grade": "13",
+      "step": 1,
+      "count": 1
+    }
+  ],
+  "equipment": [
+    {
+      "code": "GEN_006",
+      "count": 1
+    }
+  ],
+  "supplies": [],
+  "contractors": [],
+  "overtime": [],
+  "customCosts": [],
+  "billingOrganization": "Test Organization",
+  "billingAddress": "123 Test Street, Test City, TC 12345",
+  "billingContact": "John Doe",
+  "costCenter": "TEST_CC_001",
+  "invoiceTemplate": "GOVERNMENT_STANDARD",
+  "billingTerms": "NET_30",
+  "invoiceNotes": "Test invoice for demonstration purposes"
+}
