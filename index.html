@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Federal Cost Analyzer Pro - Government Personnel Pricing Calculator</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        /* Professional Logo Styles */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gov-primary) 0%, var(--gov-secondary) 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .logo-icon .fa-shield-alt {
+            font-size: 2rem;
+            color: white;
+            position: absolute;
+            z-index: 1;
+        }
+        
+        .logo-icon .logo-overlay {
+            font-size: 1.2rem;
+            color: var(--gov-primary);
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000000;
+            line-height: 1.2;
+            margin-bottom: 0.25rem;
+        }
+        
+        .logo-subtitle {
+            font-size: 0.875rem;
+            color: #000000;
+            font-weight: 600;
+            opacity: 1;
+        }
+        
+        /* Responsive logo adjustments */
+        @media (max-width: 768px) {
+            .logo-container {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+            
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .logo-icon .fa-shield-alt {
+                font-size: 1.5rem;
+            }
+            
+            .logo-icon .logo-overlay {
+                font-size: 1rem;
+                width: 20px;
+                height: 20px;
+                bottom: 6px;
+                right: 6px;
+            }
+            
+            .logo-title {
+                font-size: 1.25rem;
+            }
+            
+            .logo-subtitle {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Government Header Styles */
+        :root {
+            --gov-primary: #003366;
+            --gov-secondary: #0066cc;
+            --gov-accent: #cc6600;
+            --gov-success: #006633;
+            --gov-warning: #cc6600;
+            --gov-danger: #cc0000;
+            --gov-light: #f8f9fa;
+            --gov-dark: #1a1a1a;
+            --gov-border: #dee2e6;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+        
+        .gov-header {
+            background: linear-gradient(135deg, var(--gov-primary) 0%, var(--gov-secondary) 100%);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--gov-accent);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gov-logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gov-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .main-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            padding: 2.5rem;
+            border: 1px solid var(--gov-border);
+        }
+        
+        .form-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--gov-primary);
+            border: 1px solid var(--gov-border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-section h3 {
+            color: var(--gov-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--gov-primary);
+            padding-bottom: 0.5rem;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--gov-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-select, .form-control {
+            border: 2px solid var(--gov-border);
+            border-radius: 6px;
+            padding: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-select:focus, .form-control:focus {
+            border-color: var(--gov-primary);
+            box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.25);
+        }
+        
+        .btn-gov-primary {
+            background: linear-gradient(135deg, var(--gov-primary) 0%, var(--gov-secondary) 100%);
+            border: none;
+            color: white;
+            padding: 1rem 3rem;
+            font-weight: 600;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+        }
+        
+        .btn-gov-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+            color: white;
+        }
+        
+        .btn-gov-primary:disabled {
+            background: #6c757d !important;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+            opacity: 0.6;
+        }
+        
+        .results-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            border: 2px solid var(--gov-primary);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 5px solid var(--gov-success);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--gov-border);
+        }
+        
+        .result-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--gov-primary);
+        }
+        
+        .result-label {
+            font-weight: 600;
+            color: var(--gov-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, var(--gov-dark) 0%, #2c2c2c 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 4px solid var(--gov-accent);
+        }
+        
+        .nav-tabs {
+            border-bottom: 3px solid var(--gov-border);
+            margin-bottom: 0;
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--gov-primary);
+            border: none;
+            border-bottom: 3px solid transparent;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tabs .nav-link:hover {
+            color: var(--gov-secondary);
+            background: rgba(0, 102, 204, 0.05);
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--gov-secondary);
+            border-bottom: 3px solid var(--gov-secondary);
+            background: rgba(0, 102, 204, 0.1);
+        }
+        
+        .alert-gov {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 1px solid var(--gov-success);
+            color: var(--gov-success);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            border: 1px solid #17a2b8;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .status-badge {
+            background: var(--gov-success);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, var(--gov-primary) 50%, transparent 100%);
+            margin: 2rem 0;
+        }
+        
+        .feature-highlight {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 1px solid var(--gov-warning);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        /* Result Cards for Static Version */
+        .results-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+        
+        .result-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 1px solid var(--gov-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            height: 100%;
+        }
+        
+        .result-card h5 {
+            color: var(--gov-primary);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--gov-secondary);
+            padding-bottom: 0.5rem;
+        }
+        
+        .result-card p {
+            margin-bottom: 0.5rem;
+            color: var(--gov-dark);
+        }
+        
+        .rate-card {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid var(--gov-secondary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            height: 100%;
+        }
+        
+        .rate-card h5 {
+            color: var(--gov-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .rate-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gov-success);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Government Header -->
+    <header class="gov-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="gov-logo">
+                        <div class="logo-container">
+                            <div class="logo-icon">
+                                <i class="fas fa-shield-alt"></i>
+                                <i class="fas fa-calculator logo-overlay"></i>
+                            </div>
+                            <div class="logo-text">
+                                <div class="logo-title">Federal Cost Analyzer Pro</div>
+                                <div class="logo-subtitle">Professional Cost Analysis Platform</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gov-subtitle">
+                        Independent salary and cost calculation tool using official OPM.gov data
+                    </div>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="d-flex flex-column align-items-end">
+                        <div class="status-badge mb-2">
+                            <i class="fas fa-database me-1"></i>OPM Data
+                        </div>
+                        <small class="opacity-75">Powered by OPM.gov</small>
+                        <small class="opacity-75">Version 1.0.0</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Disclaimer Banner -->
+    <div class="container mt-3">
+        <div class="alert alert-warning" role="alert">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                <div>
+                    <strong>Important Disclaimer:</strong> This is not an official U.S. Government website. 
+                    This calculator is an independent tool that uses official data from 
+                    <a href="https://www.opm.gov" target="_blank" rel="noopener" class="alert-link">OPM.gov</a> 
+                    for accurate personnel cost calculations.
+                </div>
+            </div>
+        </div>
+        
+        <div class="alert alert-danger" role="alert">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-shield-alt me-2"></i>
+                <div>
+                    <strong>Security Notice:</strong> This is a sample application and is NOT in an IL6 (Impact Level 6) environment. 
+                    Do NOT enter classified information, PII, or sensitive government data. 
+                    If you need to use this application with real data, please deploy it in the appropriate secure environment.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs mt-4" id="mainTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="calculator-tab" data-bs-toggle="tab" data-bs-target="#calculator" type="button" role="tab">
+                    <i class="fas fa-calculator me-2"></i>Individual Calculator
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="public/event-planner.html">
+                    <i class="fas fa-calendar-alt me-2"></i>Event Cost Calculator
+                </a>
+            </li>
+        </ul>
+
+        <!-- Main Calculator Tab -->
+        <div class="tab-content" id="mainTabsContent">
+            <div class="tab-pane fade show active" id="calculator" role="tabpanel">
+                <div class="main-container">
+                    <h2 class="text-center mb-4">
+                        <i class="fas fa-user-tie me-3"></i>
+                        Individual Personnel Pricing Calculator
+                    </h2>
+                    
+                    <div class="info-box">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>About this tool:</strong> Calculate accurate government personnel costs based on official OPM data including GS grade, step, locality pay, and annual hours.
+                    </div>
+                    
+                    <form id="pricingForm">
+                        <!-- Position Details Section -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-id-badge me-2"></i>Position Details</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="grade" class="form-label">GS Grade *</label>
+                                    <select class="form-select" id="grade" name="grade" required>
+                                        <option value="">Select GS Grade</option>
+                                    </select>
+                                    <small class="form-text text-muted">Choose from GS-1 through GS-15</small>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="step" class="form-label">Step *</label>
+                                    <select class="form-select" id="step" name="step" required>
+                                        <option value="">Select Step</option>
+                                    </select>
+                                    <small class="form-text text-muted">Choose from Step 1 through Step 10</small>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <label for="jobSeries" class="form-label">Job Series (Optional)</label>
+                                    <select class="form-select" id="jobSeries" name="jobSeries">
+                                        <option value="">Select Job Series</option>
+                                    </select>
+                                    <small class="form-text text-muted">Optional job classification for detailed categorization</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Location & Hours Section -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-map-marker-alt me-2"></i>Location & Hours</h3>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label for="locality" class="form-label">Locality Pay Area *</label>
+                                    <select class="form-select" id="locality" name="locality" required>
+                                        <option value="">Select Locality Pay Area</option>
+                                    </select>
+                                    <small class="form-text text-muted">Select the appropriate locality pay area for accurate calculations</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="hoursPerYear" class="form-label">Annual Hours</label>
+                                    <input type="number" class="form-control" id="hoursPerYear" name="hoursPerYear" value="2087" min="1">
+                                    <small class="form-text text-muted">Standard government work year: 2,087 hours</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Calculate Button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-gov-primary btn-lg" id="calculateBtn">
+                                <i class="fas fa-calculator me-2"></i>
+                                Calculate Pricing
+                            </button>
+                            <div class="mt-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Please select GS Grade, Step, and Locality Pay Area to enable calculation
+                                </small>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Results Section -->
+                    <div id="results" class="results-section" style="display: none;">
+                        <h3 class="text-center mb-4">
+                            <i class="fas fa-chart-bar me-2"></i>
+                            Calculation Results
+                        </h3>
+                        <div id="resultsContent"></div>
+                        
+                        <div class="section-divider"></div>
+                        
+                        <!-- Export Options -->
+                        <div class="text-center">
+                            <button class="btn btn-outline-primary me-2" onclick="printResults()">
+                                <i class="fas fa-print me-2"></i>Print Results
+                            </button>
+                            <button class="btn btn-outline-success" onclick="exportToCSV()">
+                                <i class="fas fa-download me-2"></i>Export to CSV
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-shield-alt me-2"></i>Government Personnel Pricing Calculator</h5>
+                    <p class="mb-0">Official tool for calculating government personnel costs based on OPM data. This application provides accurate, up-to-date pricing information for government agencies and contractors.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <h6><i class="fas fa-link me-2"></i>Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="public/event-planner.html" class="text-light"><i class="fas fa-calendar-alt me-1"></i>Event Cost Calculator</a></li>
+                        <li><a href="https://www.opm.gov/policy-data-oversight/pay-leave/salaries-wages/" class="text-light" target="_blank"><i class="fas fa-external-link-alt me-1"></i>OPM Salary Tables</a></li>
+                        <li><a href="https://www.opm.gov/policy-data-oversight/pay-leave/salaries-wages/locality-pay-area-definitions/" class="text-light" target="_blank"><i class="fas fa-external-link-alt me-1"></i>Locality Pay Areas</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+            <div class="text-center">
+                <div class="disclaimer-section">
+                    <div class="alert alert-info mb-2" role="alert">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Disclaimer:</strong> This is not an official U.S. Government website. This calculator is an independent tool that uses official data from <a href="https://www.opm.gov" target="_blank" rel="noopener">OPM.gov</a> for personnel cost calculations.
+                    </div>
+                    <div class="alert alert-danger mb-2" role="alert">
+                        <i class="fas fa-shield-alt me-2"></i>
+                        <strong>Security Notice:</strong> This is a sample application and is NOT in an IL6 environment. Do NOT enter classified information, PII, or sensitive government data.
+                    </div>
+                    <small>&copy; 2024 Government Personnel Pricing Calculator. All rights reserved. | Data sourced from official OPM.gov government records.</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="public/app.js"></script>
+</body>
+</html>
