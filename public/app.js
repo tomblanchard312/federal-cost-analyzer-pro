@@ -41,6 +41,76 @@ const MOCK_DATA = {
         { step: '8', multiplier: 1.21 },
         { step: '9', multiplier: 1.24 },
         { step: '10', multiplier: 1.27 }
+    ],
+    jobSeries: [
+        { code: '0301', title: 'Miscellaneous Administration and Program' },
+        { code: '0340', title: 'Program Management' },
+        { code: '0501', title: 'Financial Administration and Program' },
+        { code: '0801', title: 'General Engineering' },
+        { code: '0808', title: 'Architecture' },
+        { code: '0854', title: 'Computer Engineering' },
+        { code: '0855', title: 'Electronics Engineering' },
+        { code: '1102', title: 'Contracting' },
+        { code: '1550', title: 'Computer Science' },
+        { code: '2210', title: 'Information Technology Management' },
+        { code: '0303', title: 'Miscellaneous Clerk and Assistant' },
+        { code: '0305', title: 'Miscellaneous Mail and File' },
+        { code: '0312', title: 'Secretary' },
+        { code: '0318', title: 'Secretary' },
+        { code: '0326', title: 'Office Automation Clerk' },
+        { code: '0332', title: 'Computer Operation' },
+        { code: '0335', title: 'Computer Clerk and Assistant' },
+        { code: '0341', title: 'Administrative Officer' },
+        { code: '0342', title: 'Support Services Administration' },
+        { code: '0343', title: 'Management and Program Analysis' },
+        { code: '0344', title: 'Management and Program Clerical and Assistance' },
+        { code: '0346', title: 'Logistics Management' },
+        { code: '0350', title: 'Equipment Operator' },
+        { code: '0351', title: 'Transportation Clerk and Assistant' },
+        { code: '0356', title: 'Transportation Clerk and Assistant' },
+        { code: '0357', title: 'Coding' },
+        { code: '0358', title: 'Clerk-Typist' },
+        { code: '0359', title: 'Data Transcriber' },
+        { code: '0360', title: 'Equal Opportunity Compliance' },
+        { code: '0361', title: 'Equal Opportunity Assistance' },
+        { code: '0362', title: 'Contact Representative' },
+        { code: '0363', title: 'Passport and Visa Examining' },
+        { code: '0364', title: 'Citizen Information Specialist' },
+        { code: '0365', title: 'Clerk' },
+        { code: '0366', title: 'Clerk-Stenographer' },
+        { code: '0367', title: 'Clerk-Typist' },
+        { code: '0368', title: 'Clerk-Typist' },
+        { code: '0369', title: 'Office Automation Clerk' },
+        { code: '0370', title: 'Office Automation Clerk' },
+        { code: '0371', title: 'Office Automation Clerk' },
+        { code: '0372', title: 'Office Automation Clerk' },
+        { code: '0373', title: 'Office Automation Clerk' },
+        { code: '0374', title: 'Office Automation Clerk' },
+        { code: '0375', title: 'Office Automation Clerk' },
+        { code: '0376', title: 'Office Automation Clerk' },
+        { code: '0377', title: 'Office Automation Clerk' },
+        { code: '0378', title: 'Office Automation Clerk' },
+        { code: '0379', title: 'Office Automation Clerk' },
+        { code: '0380', title: 'Office Automation Clerk' },
+        { code: '0381', title: 'Office Automation Clerk' },
+        { code: '0382', title: 'Office Automation Clerk' },
+        { code: '0383', title: 'Office Automation Clerk' },
+        { code: '0384', title: 'Office Automation Clerk' },
+        { code: '0385', title: 'Office Automation Clerk' },
+        { code: '0386', title: 'Office Automation Clerk' },
+        { code: '0387', title: 'Office Automation Clerk' },
+        { code: '0388', title: 'Office Automation Clerk' },
+        { code: '0389', title: 'Office Automation Clerk' },
+        { code: '0390', title: 'Office Automation Clerk' },
+        { code: '0391', title: 'Office Automation Clerk' },
+        { code: '0392', title: 'Office Automation Clerk' },
+        { code: '0393', title: 'Office Automation Clerk' },
+        { code: '0394', title: 'Office Automation Clerk' },
+        { code: '0395', title: 'Office Automation Clerk' },
+        { code: '0396', title: 'Office Automation Clerk' },
+        { code: '0397', title: 'Office Automation Clerk' },
+        { code: '0398', title: 'Office Automation Clerk' },
+        { code: '0399', title: 'Office Automation Clerk' }
     ]
 };
 
@@ -55,6 +125,7 @@ class StaticPersonnelCalculator {
         this.populateGSGrades();
         this.populateSteps();
         this.populateLocalityAreas();
+        this.populateJobSeries();
     }
 
     populateGSGrades() {
@@ -92,6 +163,19 @@ class StaticPersonnelCalculator {
                 option.value = code;
                 option.textContent = `${data.name} (${(data.rate * 100).toFixed(2)}%)`;
                 localitySelect.appendChild(option);
+            });
+        }
+    }
+
+    populateJobSeries() {
+        const jobSeriesSelect = document.getElementById('jobSeries');
+        if (jobSeriesSelect) {
+            jobSeriesSelect.innerHTML = '<option value="">Select Job Series</option>';
+            MOCK_DATA.jobSeries.forEach(series => {
+                const option = document.createElement('option');
+                option.value = series.code;
+                option.textContent = `${series.code} - ${series.title}`;
+                jobSeriesSelect.appendChild(option);
             });
         }
     }
@@ -220,6 +304,9 @@ class StaticPersonnelCalculator {
                 </div>
             </div>
         `;
+        
+        // Show the results section
+        resultsDiv.style.display = 'block';
     }
 
     showError(message) {
@@ -231,6 +318,7 @@ class StaticPersonnelCalculator {
                     <strong>Error:</strong> ${message}
                 </div>
             `;
+            resultsDiv.style.display = 'block';
         }
     }
 
