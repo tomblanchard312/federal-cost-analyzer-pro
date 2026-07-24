@@ -1,0 +1,13 @@
+{
+  "_meta": {
+    "description": "GSA privately owned vehicle (POV) mileage reimbursement rates. These are published annually by GSA; values below are the CY2025 rates used as an offline fallback.",
+    "source": "https://www.gsa.gov/travel/plan-book/transportation-airfare-rates-pov-rates/privately-owned-vehicle-pov-mileage-reimbursement-rates",
+    "effectiveYear": 2025
+  },
+  "rates": {
+    "AUTOMOBILE": { "label": "Privately Owned Automobile", "ratePerMile": 0.70 },
+    "MOTORCYCLE": { "label": "Privately Owned Motorcycle", "ratePerMile": 0.68 },
+    "AIRPLANE": { "label": "Privately Owned Airplane", "ratePerMile": 1.75 },
+    "RELOCATION": { "label": "Automobile (moving/relocation)", "ratePerMile": 0.21 }
+  }
+}

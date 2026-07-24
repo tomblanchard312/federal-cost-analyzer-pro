@@ -1,0 +1,23 @@
+{
+  "_meta": {
+    "description": "Representative catalog of government event equipment with sample rental pricing (USD). Pricing is illustrative for demonstration, not an official GSA schedule.",
+    "chargebackCategory": "EQUIPMENT"
+  },
+  "items": [
+    { "code": "AV_001", "name": "Projector & Screen", "category": "Audio/Visual", "hourlyRate": 25.00 },
+    { "code": "AV_002", "name": "PA / Sound System", "category": "Audio/Visual", "hourlyRate": 40.00 },
+    { "code": "AV_003", "name": "Video Conferencing Kit", "category": "Audio/Visual", "hourlyRate": 55.00 },
+    { "code": "AV_004", "name": "Wireless Microphone (each)", "category": "Audio/Visual", "hourlyRate": 8.00 },
+    { "code": "IT_001", "name": "Laptop Workstation", "category": "IT", "hourlyRate": 12.00 },
+    { "code": "IT_002", "name": "Network Switch / WiFi AP", "category": "IT", "hourlyRate": 15.00 },
+    { "code": "IT_003", "name": "Large Format Display", "category": "IT", "hourlyRate": 30.00 },
+    { "code": "PWR_001", "name": "Portable Power Generator", "category": "Power", "hourlyRate": 45.00 },
+    { "code": "PWR_002", "name": "Battery / UPS Station", "category": "Power", "hourlyRate": 18.00 },
+    { "code": "FURN_001", "name": "Conference Table (seats 8)", "category": "Furniture", "hourlyRate": 6.00 },
+    { "code": "FURN_002", "name": "Folding Chairs (set of 10)", "category": "Furniture", "hourlyRate": 5.00 },
+    { "code": "FURN_003", "name": "Registration / Exhibit Booth", "category": "Furniture", "hourlyRate": 20.00 },
+    { "code": "VEH_001", "name": "Cargo Van", "category": "Vehicle", "hourlyRate": 35.00 },
+    { "code": "VEH_002", "name": "Shuttle Bus", "category": "Vehicle", "hourlyRate": 75.00 },
+    { "code": "SEC_001", "name": "Metal Detector / Screening Unit", "category": "Security", "hourlyRate": 22.00 }
+  ]
+}

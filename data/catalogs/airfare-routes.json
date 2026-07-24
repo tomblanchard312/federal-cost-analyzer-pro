@@ -1,0 +1,28 @@
+{
+  "_meta": {
+    "description": "Representative GSA City Pair Program (CPP) style one-way fares (USD) between common federal travel city pairs. Sample data for demonstration; the official CPP fares are published by GSA and should be substituted for production use.",
+    "source": "https://www.gsa.gov/travel/plan-book/transportation-airfare-rates-pov-rates/city-pair-program-cpp"
+  },
+  "routes": [
+    { "origin": "Washington, DC", "destination": "New York, NY", "oneWayFare": 149 },
+    { "origin": "Washington, DC", "destination": "Chicago, IL", "oneWayFare": 176 },
+    { "origin": "Washington, DC", "destination": "Atlanta, GA", "oneWayFare": 158 },
+    { "origin": "Washington, DC", "destination": "Los Angeles, CA", "oneWayFare": 312 },
+    { "origin": "Washington, DC", "destination": "San Francisco, CA", "oneWayFare": 341 },
+    { "origin": "Washington, DC", "destination": "Denver, CO", "oneWayFare": 244 },
+    { "origin": "Washington, DC", "destination": "Dallas, TX", "oneWayFare": 231 },
+    { "origin": "Washington, DC", "destination": "Seattle, WA", "oneWayFare": 358 },
+    { "origin": "New York, NY", "destination": "Chicago, IL", "oneWayFare": 168 },
+    { "origin": "New York, NY", "destination": "Los Angeles, CA", "oneWayFare": 304 },
+    { "origin": "New York, NY", "destination": "Atlanta, GA", "oneWayFare": 172 },
+    { "origin": "Chicago, IL", "destination": "Los Angeles, CA", "oneWayFare": 261 },
+    { "origin": "Chicago, IL", "destination": "Denver, CO", "oneWayFare": 189 },
+    { "origin": "Chicago, IL", "destination": "Dallas, TX", "oneWayFare": 194 },
+    { "origin": "Los Angeles, CA", "destination": "San Francisco, CA", "oneWayFare": 121 },
+    { "origin": "Los Angeles, CA", "destination": "Seattle, WA", "oneWayFare": 198 },
+    { "origin": "Atlanta, GA", "destination": "Dallas, TX", "oneWayFare": 181 },
+    { "origin": "Denver, CO", "destination": "Seattle, WA", "oneWayFare": 207 },
+    { "origin": "Dallas, TX", "destination": "Houston, TX", "oneWayFare": 112 },
+    { "origin": "Seattle, WA", "destination": "San Francisco, CA", "oneWayFare": 176 }
+  ]
+}

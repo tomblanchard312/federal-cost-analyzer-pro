@@ -1,0 +1,27 @@
+{
+  "_meta": {
+    "description": "Snapshot of the OPM General Schedule (GS) BASE pay table. Used only as an offline fallback when the live OPM tables cannot be fetched. On a successful live fetch the server overwrites its in-memory copy and its on-disk cache with the authoritative OPM data.",
+    "source": "https://www.opm.gov/policy-data-oversight/pay-leave/salaries-wages/salary-tables/25Tables/html/GS.aspx",
+    "effectiveYear": 2025,
+    "increase": "Incorporates the 1.7% General Schedule increase effective January 2025",
+    "annualHoursDivisor": 2087,
+    "retrievedNote": "Values transcribed from the OPM 2025-GS published table. Verify against the live source; the application refreshes these automatically at runtime."
+  },
+  "grades": {
+    "1":  [22948, 23704, 24457, 25207, 25960, 26405, 27150, 27901, 27931, 28633],
+    "2":  [25802, 26413, 27270, 27997, 28311, 29142, 29973, 30804, 31635, 32466],
+    "3":  [28153, 29091, 30029, 30967, 31905, 32843, 33781, 34719, 35657, 36595],
+    "4":  [31609, 32663, 33717, 34771, 35825, 36879, 37933, 38987, 40041, 41095],
+    "5":  [35373, 36552, 37731, 38910, 40089, 41268, 42447, 43626, 44805, 45984],
+    "6":  [39429, 40743, 42057, 43371, 44685, 45999, 47313, 48627, 49941, 51255],
+    "7":  [43825, 45286, 46747, 48208, 49669, 51130, 52591, 54052, 55513, 56974],
+    "8":  [48540, 50158, 51776, 53394, 55012, 56630, 58248, 59866, 61484, 63102],
+    "9":  [53634, 55422, 57210, 58998, 60786, 62574, 64362, 66150, 67938, 69726],
+    "10": [59075, 61044, 63013, 64982, 66951, 68920, 70889, 72858, 74827, 76796],
+    "11": [64957, 67122, 69287, 71452, 73617, 75782, 77947, 80112, 82277, 84442],
+    "12": [77847, 80442, 83037, 85632, 88227, 90822, 93417, 96012, 98607, 101202],
+    "13": [92589, 95675, 98761, 101847, 104933, 108019, 111105, 114191, 117277, 120363],
+    "14": [109417, 113064, 116711, 120358, 124005, 127652, 131299, 134946, 138593, 142240],
+    "15": [128714, 132998, 137282, 141566, 145850, 150134, 154418, 158702, 162986, 167270]
+  }
+}

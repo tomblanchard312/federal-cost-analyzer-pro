@@ -12,14 +12,14 @@
   ],
   "equipment": [
     {
-      "code": "PWR_GEN",
+      "code": "PWR_001",
       "count": 1,
       "hours": 8
     }
   ],
   "supplies": [
     {
-      "code": "OFFICE_SUP",
+      "code": "SUP_001",
       "quantity": 1
     }
   ]

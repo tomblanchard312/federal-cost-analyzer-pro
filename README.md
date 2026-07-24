@@ -46,20 +46,62 @@ cd federal-cost-analyzer-pro
 npm install
 
 # Create environment file
-cp .env.example .env
+cp env.example .env
 
 # Start the application
 npm start
 ```
 
+The server listens on `http://localhost:3001` by default.
+
 ### Environment Variables
-Create a `.env` file with the following variables:
+Create a `.env` file (copy from `env.example`). Key variables:
 ```env
 PORT=3001
 NODE_ENV=development
+PAY_YEAR=2025
+GSA_FISCAL_YEAR=2025
 OPM_BASE_URL=https://www.opm.gov
-GSA_BASE_URL=https://www.gsa.gov
+GSA_API_BASE=https://api.gsa.gov/travel/perdiem/v2
+# Optional: enables the live GSA Per Diem API. Free key from https://open.gsa.gov/api/perdiem/
+GSA_API_KEY=
+FETCH_TIMEOUT_MS=12000
 ```
+
+## Data Sources & Real Data
+
+Personnel pay figures are **real OPM data**, not hardcoded mock values:
+
+- **OPM General Schedule pay** — On startup the server fetches the official OPM
+  GS base salary table (e.g. the 2025 `.../25Tables/html/GS.aspx` page), parses
+  the published HTML, and caches the result under `data/cache/`. Locality pay
+  percentages are applied on top (`adjusted = base × (1 + localityRate)`).
+- **GSA per diem** — When `GSA_API_KEY` is set, per diem lookups use the live
+  [GSA Per Diem API](https://open.gsa.gov/api/perdiem/). POV mileage and City
+  Pair airfare use GSA-published reference data.
+- **Offline fallback** — If OPM/GSA can't be reached (network policy, outage),
+  the server falls back to a bundled snapshot of the real published figures in
+  `data/seed/` and `data/catalogs/` so it always returns genuine numbers and
+  never hard-fails. The next successful live fetch refreshes the cache.
+- **Provenance** — `GET /api/data-sources` reports, for the current process,
+  whether pay/travel data came from a live fetch, the on-disk cache, or the
+  bundled fallback.
+
+> Outbound network access to `opm.gov` and `api.gsa.gov` is required for live
+> data. In restricted environments the app runs on the bundled snapshot until
+> those hosts are reachable.
+
+> Equipment, supplies, airfare, and per diem line-item *pricing* in the catalog
+> files is illustrative sample data for demonstration, clearly labeled in each
+> file's `_meta` block.
+
+## Deployment note
+
+This is now a **Node/Express application**, so it must run on a Node host
+(e.g. a VM, container, or a PaaS such as Azure App Service / AWS). **GitHub
+Pages cannot host it**, because GitHub Pages serves static files only and
+cannot run the server that fetches OPM/GSA data. The static files in `public/`
+still require this API to function.
 
 ## Usage
 
@@ -88,30 +130,39 @@ GSA_BASE_URL=https://www.gsa.gov
 
 ## API Endpoints
 
-### Personnel & Pricing
-- `GET /api/gs-grades` - Available GS grades
-- `GET /api/locality-rates` - Locality pay rates
-- `GET /api/special-rates` - Special rate tables
-- `POST /api/calculate` - Calculate personnel costs
+### System & Provenance
+- `GET /api/health` - Service health / readiness
+- `GET /api/data-sources` - Reports whether OPM/GSA data is live, cached, or fallback
+
+### Personnel & Pricing (real OPM data)
+- `GET /api/gs-grades` - GS grades with base salaries (from the OPM base table)
+- `GET /api/locality-areas` - Locality pay areas and percentages
+- `GET /api/locality-rates` - Alias of `/api/locality-areas`
+- `GET /api/special-rates` - Special rate tables (informational stub)
+- `GET /api/job-series` - OPM occupational (job) series
+- `POST /api/calculate` - Calculate personnel costs `{ grade, step, locality, hours }`
 
 ### Event Management
+- `GET /api/event-types` - Event templates with default personnel/equipment/supplies
+- `GET /api/chargeback-categories` - Chargeback categories and cost centers
 - `POST /api/calculate-event` - Calculate total event costs
 - `POST /api/generate-invoice` - Create invoice
 - `POST /api/generate-chargeback` - Generate chargeback report
 
 ### Travel & Transportation
-- `GET /api/gsa-per-diem-rates` - Per diem rates by location
-- `GET /api/gsa-airfare-rates` - City pair airfare rates
+- `GET /api/gsa-per-diem-rates?location=City,ST` - Per diem rate for a location
+- `GET /api/airfare-routes` (alias `/api/gsa-airfare-rates`) - City Pair routes
 - `GET /api/gsa-pov-mileage-rates` - POV mileage rates
 - `POST /api/calculate-travel-costs` - Calculate travel expenses
+- `POST /api/calculate-pov-mileage` - Calculate POV mileage cost `{ vehicleType, miles }`
 
 ### Equipment & Supplies
-- `GET /api/equipment-catalog` - Equipment categories and pricing
-- `GET /api/supplies-catalog` - Supplies categories and pricing
+- `GET /api/equipment` (alias `/api/equipment-catalog`) - Equipment catalog and pricing
+- `GET /api/supplies` (alias `/api/supplies-catalog`) - Supplies catalog and pricing
 
 ### Export & Reporting
-- `POST /api/export-invoice-excel` - Export invoice to Excel
-- `POST /api/export-invoice-pdf` - Export invoice to PDF
+- `POST /api/export-invoice-excel` - Export invoice to Excel `{ invoiceData }`
+- `POST /api/export-invoice-pdf` - Export invoice to PDF `{ invoiceData }`
 
 ## Security & Usage Disclaimer
 
@@ -122,8 +173,9 @@ GSA_BASE_URL=https://www.gsa.gov
 - **If you need to use this application with real data, deploy it in the appropriate secure environment**
 
 ### Data Privacy
-- All calculations are performed locally
-- No data is stored or transmitted to external servers
+- Cost calculations are performed on your own server instance
+- The server makes outbound requests to public OPM/GSA sources to retrieve pay
+  and travel rate data; the values you enter are not sent to those services
 - Uses only publicly available government data sources
 - No authentication or user accounts required
 

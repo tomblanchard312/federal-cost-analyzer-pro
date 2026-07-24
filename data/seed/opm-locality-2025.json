@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "description": "Snapshot of OPM General Schedule locality pay percentages. Offline fallback only; the server refreshes from the live OPM locality tables at runtime. Locality pay is applied on top of the GS base rate: adjusted = base * (1 + rate).",
+    "source": "https://www.opm.gov/policy-data-oversight/pay-leave/salaries-wages/2025/general-schedule/",
+    "effectiveYear": 2025,
+    "note": "A representative subset of the 58 GS locality pay areas. Verify against the live source; refreshed automatically at runtime."
+  },
+  "areas": [
+    { "code": "SAN_FRANCISCO", "name": "San Jose-San Francisco-Oakland, CA", "rate": 0.4541 },
+    { "code": "NEW_YORK", "name": "New York-Newark, NY-NJ-CT-PA", "rate": 0.3711 },
+    { "code": "LOS_ANGELES", "name": "Los Angeles-Long Beach, CA", "rate": 0.3655 },
+    { "code": "SAN_DIEGO", "name": "San Diego-Chula Vista-Carlsbad, CA", "rate": 0.3477 },
+    { "code": "HOUSTON", "name": "Houston-The Woodlands-Sugar Land, TX", "rate": 0.3461 },
+    { "code": "WASHINGTON", "name": "Washington-Baltimore-Arlington, DC-MD-VA-WV-PA", "rate": 0.3394 },
+    { "code": "CHICAGO", "name": "Chicago-Naperville, IL-IN-WI", "rate": 0.3099 },
+    { "code": "PHILADELPHIA", "name": "Philadelphia-Camden-Wilmington, PA-NJ-DE-MD", "rate": 0.3090 },
+    { "code": "DALLAS", "name": "Dallas-Fort Worth, TX-OK", "rate": 0.2779 },
+    { "code": "PHOENIX", "name": "Phoenix-Mesa-Scottsdale, AZ", "rate": 0.2303 },
+    { "code": "SAN_ANTONIO", "name": "San Antonio-New Braunfels-Pearsall, TX", "rate": 0.1901 },
+    { "code": "REST_OF_US", "name": "Rest of U.S.", "rate": 0.1706 }
+  ]
+}

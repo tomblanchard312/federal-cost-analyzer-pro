@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "description": "GSA per diem (lodging + M&IE) rates. The server fetches live rates from the GSA Per Diem API when GSA_API_KEY is configured; these values are the offline fallback, including the standard CONUS rate.",
+    "source": "https://open.gsa.gov/api/perdiem/",
+    "fiscalYear": 2025,
+    "note": "M&IE is the daily meals & incidental expenses rate; lodging is the maximum nightly lodging rate."
+  },
+  "standardConus": { "location": "Standard CONUS Rate", "lodging": 110, "mie": 68 },
+  "locations": [
+    { "location": "Washington, DC", "lodging": 258, "mie": 86 },
+    { "location": "New York, NY", "lodging": 297, "mie": 92 },
+    { "location": "San Francisco, CA", "lodging": 347, "mie": 92 },
+    { "location": "Los Angeles, CA", "lodging": 202, "mie": 86 },
+    { "location": "Chicago, IL", "lodging": 218, "mie": 86 },
+    { "location": "Boston, MA", "lodging": 315, "mie": 92 },
+    { "location": "Seattle, WA", "lodging": 233, "mie": 86 },
+    { "location": "Denver, CO", "lodging": 199, "mie": 86 },
+    { "location": "Atlanta, GA", "lodging": 179, "mie": 79 },
+    { "location": "Dallas, TX", "lodging": 175, "mie": 86 },
+    { "location": "Houston, TX", "lodging": 141, "mie": 79 }
+  ]
+}

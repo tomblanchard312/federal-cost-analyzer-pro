@@ -1,0 +1,44 @@
+[
+  {
+    "code": "CONFERENCE",
+    "name": "Conference",
+    "defaultPersonnel": ["GS_13", "GS_12", "GS_09"],
+    "defaultEquipment": ["AV_001", "AV_002", "IT_002"],
+    "defaultSupplies": ["SUP_003", "SUP_004", "SUP_006"]
+  },
+  {
+    "code": "TRAINING",
+    "name": "Training Session",
+    "defaultPersonnel": ["GS_13", "GS_11"],
+    "defaultEquipment": ["AV_001", "IT_001"],
+    "defaultSupplies": ["SUP_001", "SUP_002"]
+  },
+  {
+    "code": "TOWNHALL",
+    "name": "Town Hall / All-Hands",
+    "defaultPersonnel": ["GS_14", "GS_12", "GS_07"],
+    "defaultEquipment": ["AV_002", "AV_004", "AV_003"],
+    "defaultSupplies": ["SUP_005", "SUP_008"]
+  },
+  {
+    "code": "FIELD_OP",
+    "name": "Field Operation / Deployment",
+    "defaultPersonnel": ["GS_12", "GS_09", "GS_07"],
+    "defaultEquipment": ["PWR_001", "VEH_001", "SEC_001"],
+    "defaultSupplies": ["SUP_009", "SUP_010"]
+  },
+  {
+    "code": "EXHIBIT",
+    "name": "Exhibit / Public Outreach",
+    "defaultPersonnel": ["GS_11", "GS_09"],
+    "defaultEquipment": ["FURN_003", "IT_003", "AV_004"],
+    "defaultSupplies": ["SUP_005", "SUP_003"]
+  },
+  {
+    "code": "CEREMONY",
+    "name": "Ceremony / Official Event",
+    "defaultPersonnel": ["GS_15", "GS_13", "GS_09"],
+    "defaultEquipment": ["AV_002", "FURN_001", "FURN_002"],
+    "defaultSupplies": ["SUP_004", "SUP_006", "SUP_008"]
+  }
+]
