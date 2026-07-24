@@ -1,0 +1,18 @@
+{
+  "_meta": {
+    "description": "Representative catalog of government event supplies with sample unit pricing (USD). Pricing is illustrative for demonstration, not an official GSA schedule.",
+    "chargebackCategory": "SUPPLIES"
+  },
+  "items": [
+    { "code": "SUP_001", "name": "Office Supply Kit", "category": "Office", "unitPrice": 45.00 },
+    { "code": "SUP_002", "name": "Printer Paper (case)", "category": "Office", "unitPrice": 52.00 },
+    { "code": "SUP_003", "name": "Name Badges & Lanyards (100)", "category": "Registration", "unitPrice": 75.00 },
+    { "code": "SUP_004", "name": "Printed Program / Agenda (100)", "category": "Registration", "unitPrice": 120.00 },
+    { "code": "SUP_005", "name": "Signage / Banner", "category": "Signage", "unitPrice": 85.00 },
+    { "code": "SUP_006", "name": "Catering - Coffee Service (per person)", "category": "Catering", "unitPrice": 6.50 },
+    { "code": "SUP_007", "name": "Catering - Boxed Lunch (per person)", "category": "Catering", "unitPrice": 18.00 },
+    { "code": "SUP_008", "name": "Bottled Water (case)", "category": "Catering", "unitPrice": 9.00 },
+    { "code": "SUP_009", "name": "First Aid Kit", "category": "Safety", "unitPrice": 40.00 },
+    { "code": "SUP_010", "name": "Cleaning / Sanitation Supplies", "category": "Facilities", "unitPrice": 60.00 }
+  ]
+}

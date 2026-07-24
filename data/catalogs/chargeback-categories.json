@@ -1,0 +1,9 @@
+[
+  { "code": "CB_PERS", "key": "PERSONNEL", "name": "Personnel Costs", "costCenter": "CC-1000", "markup": 0.0 },
+  { "code": "CB_EQUIP", "key": "EQUIPMENT", "name": "Equipment & Rentals", "costCenter": "CC-2000", "markup": 0.05 },
+  { "code": "CB_SUPP", "key": "SUPPLIES", "name": "Supplies & Materials", "costCenter": "CC-3000", "markup": 0.05 },
+  { "code": "CB_TRVL", "key": "TRAVEL", "name": "Travel & Per Diem", "costCenter": "CC-4000", "markup": 0.0 },
+  { "code": "CB_CONT", "key": "CONTRACTOR", "name": "Contractor Services", "costCenter": "CC-5000", "markup": 0.10 },
+  { "code": "CB_OT", "key": "OVERTIME", "name": "Overtime & Premium Pay", "costCenter": "CC-6000", "markup": 0.0 },
+  { "code": "CB_OTHR", "key": "CUSTOM", "name": "Other / Custom Costs", "costCenter": "CC-9000", "markup": 0.0 }
+]

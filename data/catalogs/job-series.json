@@ -1,0 +1,29 @@
+{
+  "_meta": {
+    "description": "OPM occupational series (job series) codes and titles. Reference data used to label positions; does not affect pay calculations.",
+    "source": "https://www.opm.gov/policy-data-oversight/classification-qualifications/general-schedule-qualification-standards/"
+  },
+  "series": [
+    { "code": "0080", "title": "Security Administration" },
+    { "code": "0083", "title": "Police" },
+    { "code": "0132", "title": "Intelligence" },
+    { "code": "0201", "title": "Human Resources Management" },
+    { "code": "0301", "title": "Miscellaneous Administration and Program" },
+    { "code": "0303", "title": "Miscellaneous Clerk and Assistant" },
+    { "code": "0340", "title": "Program Management" },
+    { "code": "0341", "title": "Administrative Officer" },
+    { "code": "0343", "title": "Management and Program Analysis" },
+    { "code": "0346", "title": "Logistics Management" },
+    { "code": "0501", "title": "Financial Administration and Program" },
+    { "code": "0510", "title": "Accounting" },
+    { "code": "0560", "title": "Budget Analysis" },
+    { "code": "0801", "title": "General Engineering" },
+    { "code": "0808", "title": "Architecture" },
+    { "code": "0854", "title": "Computer Engineering" },
+    { "code": "0855", "title": "Electronics Engineering" },
+    { "code": "1101", "title": "General Business and Industry" },
+    { "code": "1102", "title": "Contracting" },
+    { "code": "1550", "title": "Computer Science" },
+    { "code": "2210", "title": "Information Technology Management" }
+  ]
+}
